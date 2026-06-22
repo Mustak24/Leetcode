@@ -1,0 +1,19 @@
+// Last updated: 6/22/2026, 12:54:35 PM
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var searchInsert = function(nums, target) {
+    if(target < nums[0]) return 0;
+    if(target > nums[nums.length-1]) return nums.length;
+    let left = 0;
+    let rigth = nums.length-1;
+    while(left < rigth){
+        let mid = parseInt((left+rigth)/2);
+        if(nums[mid] == target) return mid;
+        else if(nums[mid] < target) left = mid+1;
+        else rigth = mid-1;
+    }
+    return rigth + (target > nums[rigth])
+};
