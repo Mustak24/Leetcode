@@ -1,4 +1,4 @@
-// Last updated: 8/3/2026, 1:12:01 PM
+// Last updated: 8/3/2026, 1:14:10 PM
 1/**
 2 * @param {number[]} stoneValue
 3 * @return {string}
@@ -8,33 +8,28 @@
 7    const cache = new Map();
 8
 9    function fn(l=0) {
-10
-11        if(cache.has(l)) return cache.get(l);
-12
-13        let s1, s2, s3, max=0;
-14        if(l < len) {
-15            s1 = stoneValue[l] - fn(l+1);
-16            max = s1
-17        }
-18        
-19        if(l < len-1) {
-20            s2 = (stoneValue[l] + stoneValue[l+1]) - fn(l+2);
-21            max = Math.max(max, s2)
-22        }
-23
-24        if(l < len-2) {
-25            s3 = (stoneValue[l] + stoneValue[l+1] + stoneValue[l+2]) - fn(l+3);
-26            max = Math.max(max, s3)
-27        }
+10        if(cache.has(l)) return cache.get(l);
+11
+12        let max=0;
+13        if(l < len) {
+14            max = stoneValue[l] - fn(l+1);
+15        }
+16        
+17        if(l < len-1) {
+18            max = Math.max(max, (stoneValue[l] + stoneValue[l+1]) - fn(l+2))
+19        }
+20
+21        if(l < len-2) {
+22            max = Math.max(max, (stoneValue[l] + stoneValue[l+1] + stoneValue[l+2]) - fn(l+3))
+23        }
+24
+25        cache.set(l, max);
+26        return max;
+27    }
 28
-29        // console.log({s1, s2, s3})
-30        cache.set(l, max);
-31        return max;
-32    }
-33
-34    const result = fn();
-35    // console.log(result)
-36    if(result < 0) return 'Bob';
-37    if(result === 0) return 'Tie';
-38    return 'Alice';
-39};
+29    const result = fn();
+30
+31    if(result < 0) return 'Bob';
+32    if(result === 0) return 'Tie';
+33    return 'Alice';
+34};
