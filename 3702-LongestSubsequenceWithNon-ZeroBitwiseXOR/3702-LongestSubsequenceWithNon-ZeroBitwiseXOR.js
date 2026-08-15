@@ -1,11 +1,11 @@
-// Last updated: 8/15/2026, 9:46:04 PM
+// Last updated: 8/15/2026, 9:46:40 PM
 1/**
 2 * @param {number[]} nums
 3 * @return {number}
 4 */
 5var longestSubsequence = function(nums) {
-6    const leftSum = [];
-7    let left=0, max = 0, size=0, zeros = 0;
+6    let left=0, max = 0, size=0, zeros = 0;
+7    
 8    for(let i=0; i<nums.length; i++) {
 9        if(nums[i] === 0) {
 10            zeros += 1;
