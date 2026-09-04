@@ -1,22 +1,18 @@
-// Last updated: 6/22/2026, 12:55:07 PM
-/**
- * @param {number[]} height
- * @return {number}
- */
-var maxArea = function(height) {
-    let max = 0;
-
-    let left = 0, right = height.length-1;
-    while(left < right) {
-        const l1 = height[left], l2 = height[right];
-        const y = Math.min(l1, l2);
-        const x = right - left;
-
-        max = Math.max(max, x * y);
-
-        if(l1 < l2) left++;
-        else right--;
-    }
-
-    return max;
-};
+// Last updated: 9/4/2026, 8:11:48 PM
+1/**
+2 * @param {number[]} height
+3 * @return {number}
+4 */
+5var maxArea = function(height) {
+6    let l=0, r=height.length-1, max = 0;
+7
+8    while(l < r) {
+9        const cap = (r - l) * Math.min(height[l], height[r]);
+10        max = Math.max(max, cap);
+11
+12        if(height[l] < height[r]) l++;
+13        else r--;
+14    } 
+15
+16    return max;
+17};
