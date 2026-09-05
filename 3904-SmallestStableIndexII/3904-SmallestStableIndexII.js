@@ -1,20 +1,23 @@
-// Last updated: 9/5/2026, 9:48:37 AM
-// 3904. Smallest Stable Index II
-// Prefix max and suffix min; first index with pmax - smin <= k. O(n).
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var firstStableIndex = function (nums, k) {
-  const n = nums.length;
-  const smin = new Float64Array(n);
-  smin[n - 1] = nums[n - 1];
-  for (let i = n - 2; i >= 0; i--) smin[i] = Math.min(nums[i], smin[i + 1]);
-  let pmax = -Infinity;
-  for (let i = 0; i < n; i++) {
-    pmax = Math.max(pmax, nums[i]);
-    if (pmax - smin[i] <= k) return i;
-  }
-  return -1;
-};
+// Last updated: 9/5/2026, 9:50:17 AM
+1/**
+2 * @param {number[]} nums
+3 * @param {number} k
+4 * @return {number}
+5 */
+6var firstStableIndex = function(nums, k) {
+7    const min = new Int32Array(nums.length);
+8    min[nums.length-1] = nums[nums.length-1];
+9    for(let i=nums.length-2; i>=0; i--) {
+10        min[i] = min[i+1] < nums[i] ? min[i+1] : nums[i];
+11    }
+12
+13    let max = nums[0]
+14    for(let i=0; i<nums.length; i++) {
+15        if(max < nums[i]) max = nums[i];
+16        const val = max - min[i];
+17
+18        if(val <= k) return i;
+19    }
+20
+21    return -1;
+22};
